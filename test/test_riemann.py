@@ -13,6 +13,18 @@ def f(x):
 riemann = IntegralRiemann(f)
 
 
+def test_right_riemann():
+    """Test right Riemann sum
+    """
+    res = riemann.right_riemann(0, 1, 4)
+    ans = 0
+    for i in range(1, 5):
+        x = 1 / 4 * i
+        ans += 1 / 4 * f(x)
+    print(f"\n{riemann.right_riemann(0, 1, 4)=}")
+    assert res == ans
+
+
 def test_left_riemann():
     """Test left Riemann sum
     """
@@ -21,23 +33,8 @@ def test_left_riemann():
     for i in range(0, 4):
         x = 1 / 4 * i
         ans += 1 / 4 * f(x)
-    print(f"{res=}")
-    print(f"{ans=}")
+    print(f"\n{riemann.left_riemann(0, 1, 4)=}")
     assert res == ans
-
-
-def test_right_riemann():
-    """Test left Riemann sum
-    """
-    res = riemann.right_riemann(0, 1, 4)
-    ans = 0
-    for i in range(1, 5):
-        x = 1 / 4 * i
-        ans += 1 / 4 * f(x)
-    print(f"{res=}")
-    print(f"{ans=}")
-    assert res == ans
-
 
 # def test_left_riemann_err(self):
 # if self.verbose:
