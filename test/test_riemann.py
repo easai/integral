@@ -4,6 +4,7 @@
 
 from src.integral import *
 import pytest
+from math import *
 
 
 def f(x):
@@ -35,6 +36,18 @@ def test_left_riemann():
         ans += 1 / 4 * f(x)
     print(f"\n{riemann.left_riemann(0, 1, 4)=}")
     assert res == ans
+
+
+def g(x):
+    return sin(pi*x)+37*x**3
+
+
+def test_left_riemann_g():
+    r=IntegralRiemann(g)
+    res=r.left_riemann(0,1,4)
+    print(f"\ng(x)=sin(pi*x)+37*x^3: {res}")
+    ans=(1+sqrt(2))/4+37*riemann.left_riemann(0, 1, 4)
+    assert abs(ans-res)<1e-6
 
 # def test_left_riemann_err(self):
 # if self.verbose:
