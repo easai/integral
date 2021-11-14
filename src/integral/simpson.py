@@ -1,6 +1,6 @@
 """Use the Simpson Rule to approximate integral
 
-Usage: simpson.py [--test|-t] [--help|-h] [--verbose|-v]
+Usage: simpson.py [--local|-l] [--help|-h] [--verbose|-v]
 
 Options:
 	-h --help	show this help message and exit

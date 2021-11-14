@@ -3,9 +3,9 @@
 Usage: midpoint.py [--test|-t] [--help|-h] [--verbose|-v]
 
 Options:
-	-h --help	show this help message and exit
-	-t --test	perform unit test
-	-v --verbose	verbose mode
+    -h --help	show this help message and exit
+    -t --test	perform unit test
+    -v --verbose	verbose mode
 """
 import unittest
 from docopt import docopt
@@ -28,7 +28,11 @@ class IntegralMidpoint():
 
     def midpoint_n(self, ff, a, b, n, limit):
         """ Obtain the minimum number of subintervals n with the error under limit using the midpoint rule
-        """
+
+        Args:
+            ff(function): f''(x)
+
+    """
         deltax = (b - a) / n
         domain = [a + x * deltax for x in range(0, n + 1)]
         value = [ff(x) for x in domain]
