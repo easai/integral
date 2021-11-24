@@ -5,15 +5,15 @@ from math import *
 
 
 class IntegralRiemann():
-    def __init__(self, f):
+    def __init__(self):
         """Constructor.
 
         Args:
         f(function): the function
         """
-        self.f = f
+        pass
 
-    def left_riemann(self, start, end, n):
+    def left_riemann(self, f, start, end, n):
         """Calculate left Riemann sum.
 
         Approximate integral of f on the interval [start,end] over n subintervals
@@ -26,11 +26,11 @@ class IntegralRiemann():
         """
         deltax = (end - start) / n
         domain = [start + x * deltax for x in range(0, n)]
-        value = [self.f(x) for x in domain]
+        value = [f(x) for x in domain]
         res = deltax * sum(value)
         return res
 
-    def right_riemann(self, start, end, n):
+    def right_riemann(self, f, start, end, n):
         """Calculate right Riemann sum.
 
         Approximate integral of f on the interval [start,end] over n subintervals
@@ -42,25 +42,25 @@ class IntegralRiemann():
             n (int): the number of intervals
         """
         deltax = (end - start) / n
-        domain = [start + x * deltax for x in range(1, n+1)]
-        value = [self.f(x) for x in domain]
+        domain = [start + x * deltax for x in range(1, n + 1)]
+        value = [f(x) for x in domain]
         res = deltax * sum(value)
         return res
 
-    def left_riemann_n(self, a, b, n, limit):
+    def left_riemann_n(self, f, a, b, n, limit):
         """ Obtain the minimum number of subintervals n with the error under limit using the left Riemann rule
         """
         deltax = (b - a) / n
         domain = [a + x * deltax for x in range(0, n + 1)]
-        value = [self.f(x) for x in domain]
+        value = [f(x) for x in domain]
         maxff = max(value)
         return ceil(sqrt(maxff * (b - a)**3 / (24 * limit)))
 
-    def left_riemann_err(self, a, b, n):
+    def left_riemann_err(self, f, a, b, n):
         """ Calculate the max error guaranteed by the left Riemann Rule
         """
         deltax = (b - a) / n
         domain = [a + x * deltax for x in range(0, n + 1)]
-        value = [self.f(x) for x in domain]
+        value = [f(x) for x in domain]
         maxff = max(value)
         return maxff * (b - a)**3 / (24 * n**2)
