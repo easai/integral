@@ -21,7 +21,6 @@ class IntegralSimpson():
         """
         deltax = (b - a) / n
         domain = [a + x * deltax for x in range(0, n + 1)]
-        print(domain)
         res = sum([4 * f(x) for x in domain[1:-1]])
         res -= sum([2 * f(x) for x in domain[1:-1][1:-1][0::2]])
         res += f(domain[0])
