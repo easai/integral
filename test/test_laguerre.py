@@ -6,9 +6,10 @@ import math
 
 @pytest.fixture
 def glq():
-    f = lambda x: math.exp(-x)
+    def f(x): return math.exp(-x)
     exact = 0.5
     return GaussLaguerreQuadrature(f, exact)
+
 
 def test_integration(glq):
     degree = 10
@@ -18,11 +19,13 @@ def test_integration(glq):
         res += w[i]*glq.f(x[i])
     assert abs(res - glq.exact) < 1e-6
 
+
 def test_find_degree(glq):
     tol = 1e-6
     degree = glq.find_degree(tol)
     assert degree > 0
     assert glq.error(degree) < tol
+
 
 def test_print_results(glq):
     degree = 10

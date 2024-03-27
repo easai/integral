@@ -60,9 +60,15 @@ class GaussLaguerreQuadrature:
         print("Degree:", n)
         print("Approximation:", self.approx_value)
         print("Error:", self.error_value)
+    
+    def print_nodes_and_weights(self, n):
+        x, w = self.laguerre_nodes_and_weights(n)
+        print(f"Abscissas: {x=}")
+        print(f"Weights: {w=}")
 
 # Example usage
 f = lambda x: math.exp(-x)
+print("f(x)=math.exp(-x)")
 gauss_hermite = GaussLaguerreQuadrature(f, .5)
 degree = gauss_hermite.find_degree(1e-6)
 gauss_hermite.print_results(degree)
