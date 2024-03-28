@@ -22,17 +22,47 @@ class MonteCarlo:
         self.seed = seed
         self.setup_logging()
 
+    def get_var(self, a, b, m):
+        fx = []
+        for i in range(0, m):
+            x = np.random.uniform(a, b)
+            fx.append(self.f(x))
+        return np.var(fx)
+
+    def get_ratio(self, a, b, m):
+        res = 1.0
+        if a < b:
+            mid = (b-a)/2.0
+            var_a = self.get_var(a, mid, m)
+            var_b = self.get_var(mid, b, m)
+        return math.sqrt(var_a/var_b)
+
     def integrate(self, n):
+        m = 100
+        r = self.get_ratio(self.a, self.b, m)
+        n_a = math.ceil(1/(1+r)*n)
+        n_b = n-n_a
+        mid = (self.b-self.a)/2
+        res = 0
+        if 0 < n_a:
+            res += self._integrate(self.a, mid, n_a)
+        if 0 < n_b:
+            res += self._integrate(mid, self.b, n_b)
+        return res
+
+    def integrate_non_adaptive(self, n):
+        return self._integrate(self.a, self.b, n)      
+
+    def _integrate(self, a, b, n):
         """
         Perform the Monte-Carlo to approximate the integral of the function.
         """
         if self.seed is not None:
             np.random.seed(self.seed)
-        h = (self.b-self.a)/n
+        h = (b-a)/n
         res = 0
         for i in range(0, n):
             x = np.random.uniform(self.a, self.b)
-            # x = np.random.rand()*(self.b-self.a)+self.a
             res += self.f(x)
         self.approx_value = h*res
         return self.approx_value
@@ -65,7 +95,6 @@ class MonteCarlo:
         self.logger.info("Degree: {}".format(n))
         self.logger.info("Approximation: {}".format(self.approx_value))
         self.logger.info("Error: {}".format(self.error_value))
-
 
     def setup_logging(self):
         logging.basicConfig(filename='monte_carlo.log',
