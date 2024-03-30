@@ -83,9 +83,9 @@ class MonteCarlo:
         while self.error(n) > tol and n < self.max_iter:
             n += 1
         if self.error_value <= tol:
-            logging.info('Tolerance achieved')
+            self.logger.info('Tolerance achieved')
         else:
-            logging.warning('Tolerance not achieved')
+            self.logger.warning('Tolerance not achieved')
         return n
 
     def print_results(self, n):
