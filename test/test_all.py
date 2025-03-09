@@ -7,23 +7,10 @@ def f(x):
     return 1 / (1 + x * x)
 
 
-riemann = IntegralRiemann()
-
-
-def test_left():
-    left = riemann.left_riemann(f, 0, 1, 4)
-    print(f"{left=}")
-
-
 def test_mid():
     mid = IntegralMidpoint()
     res_mid = mid.midpoint(f, 0, 1, 4)
     print(f"{res_mid=}")
-
-
-def test_right():
-    right = riemann.right_riemann(f, 0, 1, 4)
-    print(f"{right=}")
 
 
 def test_trap():
